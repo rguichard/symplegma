@@ -1,6 +1,6 @@
 ---
 ansible_ssh_user: core
 ansible_python_interpreter: /opt/bin/python
-ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+ansible_ssh_common_args: '-o StrictHostKeyChecking=no -o ProxyCommand="ssh -o StrictHostKeyChecking=no -W %h:%p -q core@10.16.3.100"'
 
 cni_plugin: "calico"

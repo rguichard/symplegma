@@ -18,19 +18,19 @@
       tags:
         - kubernetes_hosts
 
-- hosts: master
+- hosts: kube-master
   roles:
     - role: symplegma-kubeadm/master
       tags:
         - kubeadm-master
 
-- hosts: node
+- hosts: kube-node
   roles:
     - role: symplegma-kubeadm/node
       tags:
         - kubeadm-node
 
-- hosts: master
+- hosts: kube-master
   roles:
     - role: symplegma-calico
       tags: calico

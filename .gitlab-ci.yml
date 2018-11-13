@@ -18,6 +18,7 @@ staging:
   - ansible-galaxy install -r requirements.yml
   - ./scripts/init-openstack.sh clusterci
   - cd inventory/openstack
+  - export OS_USERNAME=symplegma
   - export OS_PASSWORD=$CITYCLOUD_SYMPLEGMA_PASSWD
   - export OS_AUTH_URL=https://identity1.citycloud.com:5000/v3/
   - export OS_USER_DOMAIN_NAME=CCP_Domain_35014

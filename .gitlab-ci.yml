@@ -3,8 +3,8 @@ preinstall:
   - apt update -qy
   - apt install -y python-dev python-pip curl unzip
   - pip install ansible python-openstackclient
-  - curl https://github.com/gruntwork-io/terragrunt/releases/download/v0.17.2/terragrunt_linux_amd64
-  - curl https://releases.hashicorp.com/terraform/0.11.10/terraform_0.11.10_linux_amd64.zip
+  - curl https://github.com/gruntwork-io/terragrunt/releases/download/v0.17.2/terragrunt_linux_amd64 > terragrunt_linux_amd64
+  - curl https://releases.hashicorp.com/terraform/0.11.10/terraform_0.11.10_linux_amd64.zip > terraform_0.11.10_linux_amd64.zip
   - unzip terraform_0.11.10_linux_amd64.zip
   - chmod +x terraform_0.11.10_linux_amd64.zip
   - chmod +x terragrunt_linux_amd64

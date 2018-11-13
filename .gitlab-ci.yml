@@ -1,0 +1,39 @@
+preinstall:
+  script:
+  - apt update -qy
+  - apt install -y python-dev python-pip curl unzip
+  - pip install ansible python-openstackclient
+  - curl https://github.com/gruntwork-io/terragrunt/releases/download/v0.17.2/terragrunt_linux_amd64
+  - curl https://releases.hashicorp.com/terraform/0.11.10/terraform_0.11.10_linux_amd64.zip
+  - unzip terraform_0.11.10_linux_amd64.zip
+  - chmod +x terraform_0.11.10_linux_amd64.zip
+  - chmod +x terragrunt_linux_amd64
+  - mv terragrunt_linux_amd64 /usr/bin
+  - mv terraform_0.11.10_linux_amd64 /usr/bin
+  - terraform --version
+  - terragrunt --version
+  - ansible --version
+  - openstack --version
+
+
+staging:
+  type: deploy
+  script:
+    - ansible-galaxy install -r requirements.yml
+    - ./scripts/init-openstack.sh clusterci
+    - cd inventory/openstack
+    - export OS_PASSWORD=$CITYCLOUD_SYMPLEGMA_PASSWD
+    - export OS_AUTH_URL=https://identity1.citycloud.com:5000/v3/
+    - export OS_USER_DOMAIN_NAME=CCP_Domain_35014
+    - export OS_PROJECT_DOMAIN_NAME=CCP_Domain_35014
+    - export OS_REGION_NAME=Kna1
+    - export OS_PROJECT_NAME="symplegma"
+    - export OS_TENANT_NAME="symplegma"
+    - export OS_AUTH_VERSION=3
+    - export OS_IDENTITY_API_VERSION=3
+    - env | grep OS
+    - openstack image list
+    - terragrunt apply-all --terragrunt-source-update
+  only:
+  - gitlab
+

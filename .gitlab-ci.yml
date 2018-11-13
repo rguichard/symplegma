@@ -31,6 +31,6 @@ staging:
   - export OS_INSECURE=true
   - env | grep OS
   - openstack image list --insecure
-  - terragrunt apply-all --terragrunt-source-update
+  - terragrunt apply-all --terragrunt-source-update --terragrunt-non-interactive
   only:
   - gitlab

@@ -1,0 +1,28 @@
+- name: Install required packages
+  package:
+    name: "{{ packages_install }}"
+    state: present
+    update_cache: yes
+
+- name: Install required pip packages
+  pip:
+    name: "{{ pip_packages_install }}"
+    state: present
+
+- name: Get Terraform
+  get_url:
+    url: https://releases.hashicorp.com/terraform/"{{ terraform_version }}"/terraform_"{{ terraform_version }}"_linux_amd64.zip
+  register: terraform
+
+- name: Unzip Terraform
+  unarchive:
+    src: "{{ terraform.dest }}"
+    mode: 0755
+    dest: "/usr/bin/"
+
+- name: Get Terragrunt
+  get_url:
+    url: https://github.com/gruntwork-io/terragrunt/releases/download/v"{{ terragrunt_version }}"/terragrunt_linux_amd64
+    dest: "/usr/bin/terragrunt"
+  register: terragrunt
+

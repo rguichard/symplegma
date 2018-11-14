@@ -12,11 +12,11 @@
 - name: Get Terraform
   get_url:
     url: https://releases.hashicorp.com/terraform/"{{ terraform_version }}"/terraform_"{{ terraform_version }}"_linux_amd64.zip
-  register: terraform
+  register: terraform_bin
 
 - name: Unzip Terraform
   unarchive:
-    src: "{{ terraform.dest }}"
+    src: "{{ terraform_bin.dest }}"
     mode: 0755
     dest: "/usr/bin/"
 
@@ -24,5 +24,6 @@
   get_url:
     url: https://github.com/gruntwork-io/terragrunt/releases/download/v"{{ terragrunt_version }}"/terragrunt_linux_amd64
     dest: "/usr/bin/terragrunt"
+    mode: 0755
   register: terragrunt
 

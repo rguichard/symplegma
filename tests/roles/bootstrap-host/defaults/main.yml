@@ -1,5 +1,6 @@
 packages_install:
   - python-pip
+  - unzip
 
 pip_packages_install:
   - ansible==2.7
